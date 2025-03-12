@@ -43,6 +43,11 @@ app.delete("/pokemons/:id", async (request, response) => {
     response.json(result.rows[0]);
 });
 
+app.get("/pokemons/:id", async (request, response) => {
+    const result = await pool.query("SELECT * FROM pokemons WHERE id=$1",[id]);
+    response.json(result.[0]);
+});
+
 app.listen(80, () => {
     console.log("Server is running on port 80");
 });
