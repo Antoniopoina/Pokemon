@@ -18,9 +18,9 @@ const pool = new Pool({
     port: process.env.DB_PORT
 });
 
-app.getMaxListeners("/pokemons", async (request, response) => {
+app.get("/pokemons", async (request, response) => {
     const result = await pool.query("SELECT * FROM pokemons ORDER BY id");
-    response.json(result, rows);
+    response.json(result.rows);
 });
 
 app.post("/pokemons", async (request, response) => {
@@ -44,6 +44,6 @@ app.delete("/pokemons/:id", async (request, response) => {
 });
 
 app.listen(80, () => {
-    console.log("Server is running on port 80")
+    console.log("Server is running on port 80");
 });
 
