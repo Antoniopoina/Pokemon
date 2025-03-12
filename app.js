@@ -45,7 +45,7 @@ app.delete("/pokemons/:id", async (request, response) => {
 
 app.get("/pokemons/:id", async (request, response) => {
     const result = await pool.query("SELECT * FROM pokemons WHERE id=$1",[id]);
-    response.json(result.[0]);
+    response.json(result.rows[0]);
 });
 
 app.listen(80, () => {
