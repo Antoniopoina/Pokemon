@@ -16,8 +16,8 @@ async function getPokemons(){
             <td>${p.habilidade1}<td>
             <td>${p.habilidade2}<td>
             <td>
-                <button onclick="editPokemon(${p.id}">Editar</button>
-                <button onclick="deletePokemon(${p.id}">Excluir</button>
+                <button onclick="editPokemon(${p.id})">Editar</button>
+                <button onclick="deletePokemon(${p.id})">Excluir</button>
 
             </td>
 
@@ -28,7 +28,7 @@ async function getPokemons(){
 async function editPokemon(id){
     const response = await fetch(baseURL+id);
     const pokemon = await response.json();
-    const form = document.getElementById("form")
+    const form = document.getElementById("form");
     form.nome.value = pokemon.nome;
     form.peso.value = pokemon.peso;
     form.ataque.value = pokemon.ataque;
@@ -41,7 +41,7 @@ async function editPokemon(id){
 }
 
 async function deletePokemon(id){
-    const response = await fetch(baseURL+id, method{"DELETE"});
+    const response = await fetch(baseURL+id, {method:"DELETE"});
     getPokemons();
 }
 
