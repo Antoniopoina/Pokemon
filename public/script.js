@@ -5,21 +5,21 @@ const baseURL = "http://localhost/pokemons/"
 async function getPokemons(){
     const response = await fetch(baseURL);
     const pokemons = await response.json();
-    const tbody = document.getElementById("pokemons-list");
+    const tbody = document.getElementById("pokemon-list");
     tbody.innerHTML = pokemons.map(p=>`
         <tr>
-            <td>${p.nome}<td>
-            <td>${p.peso}<td>
-            <td>${p.ataque}<td>
-            <td>${p.defesa}<td>
-            <td>${p.velocidade}<td>
-            <td>${p.habilidade1}<td>
-            <td>${p.habilidade2}<td>
+            <td>${p.nome}</td>
+            <td>${p.peso}</td>
+            <td>${p.ataque}</td>
+            <td>${p.defesa}</td>
+            <td>${p.velocidade}</td>
+            <td>${p.habilidade1}</td>
+            <td>${p.habilidade2}</td>
             <td>
                 <button onclick="editPokemon(${p.id})">Editar</button>
                 <button onclick="deletePokemon(${p.id})">Excluir</button>
-
             </td>
+        </tr>
 
         `).join("");
 
@@ -33,7 +33,7 @@ async function editPokemon(id){
     form.peso.value = pokemon.peso;
     form.ataque.value = pokemon.ataque;
     form.defesa.value = pokemon.defesa;
-    form.valocidade.value = pokemon.velocidade;
+    form.velocidade.value = pokemon.velocidade;
     form.habilidade1.value = pokemon.habilidade1;
     form.habilidade2.value = pokemon.habilidade2;
     document.getElementById("id").value = pokemon.id;
@@ -53,10 +53,10 @@ form.onsubmit = async (e) =>{
     const payload = {
         nome:nome.value,
         peso: peso.value,
-        ataque: peso.value,
-        defesa: peso.value,
-        velocidade: peso.value,
-        habilidade1: peso.value,
+        ataque: ataque.value,
+        defesa: defesa.value,
+        velocidade: velocidade.value,
+        habilidade1: habilidade1.value,
         habilidade2: habilidade2.value
     };
 
@@ -77,7 +77,7 @@ form.onsubmit = async (e) =>{
             body: JSON.stringify(payload)
         });
     }
-    form.requestFullscreen();
+    form.reset();
     document.getElementById("id").value = "";
     getPokemons();
 };
