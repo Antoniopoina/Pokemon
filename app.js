@@ -31,7 +31,7 @@ app.post("/pokemons", async (request, response) => {
 
 app.put("/pokemons/:id", async (request, response) => {
     const id = request.params.id;
-    const { nome, peso, ataque, defesa, velocidade, habilidade1, habilidade2 } = resquest.body;
+    const { nome, peso, ataque, defesa, velocidade, habilidade1, habilidade2 } = request.body;
     const result = await pool.query("UPDATE pokemons SET nome=$1, peso=$2, ataque=$3, defesa=$4, velocidade=$5, habilidade1=$6, habilidade2=$7 WHERE id=$8 RETURNING *", [nome, peso, ataque, defesa, velocidade, habilidade1, habilidade2, id]);
     response.json(result.rows[0]);
 
@@ -39,11 +39,12 @@ app.put("/pokemons/:id", async (request, response) => {
 
 app.delete("/pokemons/:id", async (request, response) => {
     const id = request.params.id;
-    const result = await pool.query("DELETE * FROM pokemons WHERE id=$1", [id]);
-    response.json(result.rows[0]);
+    const result = await pool.query("DELETE FROM pokemons WHERE id=$1", [id]);
+    response.json(result.rows);
 });
 
 app.get("/pokemons/:id", async (request, response) => {
+    const id = request.params.id;
     const result = await pool.query("SELECT * FROM pokemons WHERE id=$1",[id]);
     response.json(result.rows[0]);
 });
